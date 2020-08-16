@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
-import _ from "lodash";
 import { LoginContext } from "../../context/LoginContext";
+import { Link, Redirect } from "react-router-dom";
 
 const styles = {
   form: {
@@ -23,12 +23,14 @@ const styles = {
 };
 
 export default function SigInForm() {
-  const { checkUser, handleSignInView, handleUserLogged } = useContext(
-    LoginContext
-  );
+  const { isLogged, checkUser, handleUserLogged } = useContext(LoginContext);
   const [userCred, setUSerCredentials] = useState({
     username: "",
     password: ""
+  });
+  const [errorUSer, setErrorUser] = useState({
+    isError: false,
+    error: ""
   });
 
   const handleInput = (e) => {
@@ -45,9 +47,16 @@ export default function SigInForm() {
     e.preventDefault();
     console.log("Submit user", userCred);
     if (checkUser(userCred)) {
+      setErrorUser({
+        isError: false,
+        error: ""
+      });
       handleUserLogged(true);
     } else {
-      handleSignInView(false);
+      setErrorUser({
+        isError: true,
+        error: "You are not recognized. Please, create a new account"
+      });
     }
     setUSerCredentials({ username: "", email: "", password: "" });
   };
@@ -80,6 +89,19 @@ export default function SigInForm() {
           <button type="submit">Sign In</button>
         </div>
       </form>
+      {errorUSer.isError && (
+        <>
+          <p>{errorUSer.error}</p>
+          <Link to="/newAccount">
+            <button>Create Account</button>
+          </Link>
+        </>
+      )}
+      {isLogged && (
+        <Redirect
+          to={{ pathname: "/todos", search: `?${userCred.username}` }}
+        />
+      )}
     </>
   );
 }

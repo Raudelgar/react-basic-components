@@ -20,10 +20,6 @@ export function LoginProvider(props) {
   };
   const handleUserLogged = (bool) => {
     setLogged(bool);
-    if (!bool) {
-      setSignInView(bool);
-      setCreateAccView(bool);
-    }
   };
 
   const checkUser = (user) => {

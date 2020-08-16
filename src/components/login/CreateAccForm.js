@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import _ from "lodash";
 import { LoginContext } from "../../context/LoginContext";
+import { Redirect } from "react-router-dom";
 
 const styles = {
   form: {
@@ -38,7 +39,7 @@ export default function CreateAccForm() {
     error: ""
   });
   const verifyPass = useRef("");
-  const { addUser } = useContext(LoginContext);
+  const { isLogged, addUser } = useContext(LoginContext);
 
   const handleEmailError = (email) => {
     if (email) {
@@ -56,7 +57,7 @@ export default function CreateAccForm() {
     }
   };
   const debounceEmailError = React.useCallback(
-    _.debounce((email) => handleEmailError(email), 500, {
+    _.debounce((email) => handleEmailError(email), 700, {
       leading: false,
       trailing: true
     }),
@@ -150,6 +151,7 @@ export default function CreateAccForm() {
           <button type="submit">Create Account</button>
         </div>
       </form>
+      {isLogged && <Redirect to={`/todos/${userCred.username}`} />}
     </>
   );
 }

@@ -19,6 +19,7 @@ const styles = {
 export default function Todos() {
   const [item, setItem] = useState("");
   const [todos, setTodos] = useState([]);
+
   const handleItem = (e) => {
     e.preventDefault();
     setItem(e.target.value);
@@ -38,6 +39,7 @@ export default function Todos() {
     const newTodos = todos.filter((t) => t !== todo);
     setTodos(newTodos);
   };
+
   return (
     <>
       <div style={styles.todoContainer}>Todos</div>
