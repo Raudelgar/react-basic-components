@@ -38,7 +38,7 @@ export default function LoginForm() {
   });
   const verifyPass = useRef("");
 
-  const hanldeEmailError = (email) => {
+  const handleEmailError = (email) => {
     if (email) {
       if (emailRegex.test(email)) {
         setErrorEmail({
@@ -54,7 +54,7 @@ export default function LoginForm() {
     }
   };
   const debounceEmailError = React.useCallback(
-    _.debounce((email) => hanldeEmailError(email), 500, {
+    _.debounce((email) => handleEmailError(email), 500, {
       leading: false,
       trailing: true
     }),
@@ -74,7 +74,7 @@ export default function LoginForm() {
     }));
   };
 
-  const hanldeSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     //compare passwords
     if (checkPass()) {
@@ -106,7 +106,7 @@ export default function LoginForm() {
   return (
     <>
       <div>Login Form</div>
-      <form style={styles.form} onSubmit={hanldeSubmit}>
+      <form style={styles.form} onSubmit={handleSubmit}>
         <div style={styles.row}>
           <label>Username: </label>
           <input
