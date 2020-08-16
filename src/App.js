@@ -3,7 +3,8 @@ import "./styles.css";
 import Todos from "./components/todos/Todos";
 import { LoginContext } from "./context/LoginContext";
 import Login from "./components/login/Login";
-import SigInForm from "./components/login/SignInForm";
+import SignInForm from "./components/login/SignInForm";
+import CreateAccForm from "./components/login/CreateAccForm";
 
 export default function App() {
   const { isLogged, signInView, createAccView, handleUserLogged } = useContext(
@@ -12,8 +13,8 @@ export default function App() {
   return (
     <div className="App">
       {!isLogged && !signInView && !createAccView && <Login />}
-      {!isLogged && !createAccView && signInView && <SigInForm />}
-      {!isLogged && !signInView && createAccView && <SigInForm />}
+      {!isLogged && !createAccView && signInView && <SignInForm />}
+      {!isLogged && !signInView && createAccView && <CreateAccForm />}
       {isLogged && (
         <>
           <div>

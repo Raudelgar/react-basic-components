@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import _ from "lodash";
+import { LoginContext } from "../../context/LoginContext";
 
 const styles = {
   form: {
@@ -37,6 +38,7 @@ export default function CreateAccForm() {
     error: ""
   });
   const verifyPass = useRef("");
+  const { addUser } = useContext(LoginContext);
 
   const handleEmailError = (email) => {
     if (email) {
@@ -85,6 +87,7 @@ export default function CreateAccForm() {
       });
       setUSerCredentials({ username: "", email: "", password: "" });
       verifyPass.current.value = "";
+      addUser(userCred);
     } else {
       setErrorPass({
         isErrorPass: true,

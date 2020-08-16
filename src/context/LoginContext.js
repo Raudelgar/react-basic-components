@@ -37,6 +37,7 @@ export function LoginProvider(props) {
   const addUser = ({ username, password }) => {
     const newUsers = users.concat([{ username, password }]);
     setUsers(newUsers);
+    handleUserLogged(true);
   };
 
   const attr = {
